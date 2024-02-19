@@ -3,40 +3,42 @@
 #include <stddef.h>
 #include "sort.h"
 /**
- * _swap- swap values
- * @k:element
- * @v:element
- * Return:void
-*/
-void _swap(const int *k, const int *v)
-{
-	int temp = *(int *)k;
-	*(int *)k = *(int *)v;
-	*(int *)v = temp;
-}
-/**
- * insertion_sort_list- sort linked list
- * @list:pointer to linked list
- *
+ * insertion_sort_list - Sorts a list of integers
+ * @list: a list to sort
  * Return:void
 */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *h, *r;
+	listint_t *t;
+	listint_t *h;
 
-	if (list == NULL || *list == NULL)
+	t = *list;
+	t = t->next;
+
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
-	h = (*list)->next;
-	while (h != NULL)
+
+	while (t != NULL)
 	{
-		r = h->prev;
-		while (r != NULL && r->n > h->n)
+		while (t->prev != NULL && t->n < t->prev->n)
 		{
-			_swap(&(r->n), &(h->n));
-			r = r->prev;
-			h = h->prev;
+			h = t;
+
+			if (t->next != NULL)
+				t->next->prev = h->prev;
+			t->prev->next = h->next;
+			t = t->prev;
+			h->prev = t->prev;
+			h->next = t;
+			if (t->prev != NULL)
+				t->prev->next = h;
+			t->prev = h;
+			if (h->prev == NULL)
+				*list = h;
+
 			print_list(*list);
+			t = t->prev;
 		}
-		h = h->next;
+		t = t->next;
 	}
 }
