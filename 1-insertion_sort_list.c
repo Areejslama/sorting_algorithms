@@ -3,16 +3,16 @@
 #include <stddef.h>
 #include "sort.h"
 /**
- * swap- swap values
- * @a:element
- * @b:element
+ * _swap- swap values
+ * @k:element
+ * @v:element
  * Return:void
 */
-void _swap(const int *k, const int *v) 
+void _swap(const int *k, const int *v)
 {
-    int temp = *(int *)k;
-    *(int *)k = *(int *)v;
-    *(int *)v = temp;
+	int temp = *(int *)k;
+	*(int *)k = *(int *)v;
+	*(int *)v = temp;
 }
 /**
  * insertion_sort_list- sort linked list
@@ -22,22 +22,21 @@ void _swap(const int *k, const int *v)
 */
 void insertion_sort_list(listint_t **list)
 {
-    listint_t *t, *i;
+	listint_t *h, *r;
 
-    if (list == NULL || *list == NULL)
-        return;
-
-    i = (*list)->next;
-    while (i != NULL)
-    {
-        t = i->prev;
-        while (t != NULL && t->n > i->n)
-        {
-            _swap(&(t->n), &(i->n));
-            t = t->prev;
-            i = i->prev;
-	    print_list(*list);
-        }
-        i = i->next;
-    }
+	if (list == NULL || *list == NULL)
+		return;
+	h = (*list)->next;
+	while (h != NULL)
+	{
+		r = h->prev;
+		while (r != NULL && r->n > h->n)
+		{
+			_swap(&(r->n), &(h->n));
+			r = r->prev;
+			h = h->prev;
+			print_list(*list);
+		}
+		h = h->next;
+	}
 }
