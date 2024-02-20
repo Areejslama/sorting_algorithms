@@ -35,9 +35,10 @@ void insertion_sort_list(listint_t **list)
 			t->prev = h;
 			if (h->prev == NULL)
 				*list = h;
-			t = t->prev->next;
+			t = t->prev;
 
 			 print_list(*list);
 		}
+		t = t->next;
 	}
 }
