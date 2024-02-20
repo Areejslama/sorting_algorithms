@@ -33,8 +33,9 @@ void insertion_sort_list(listint_t **list)
 			if (t->prev != NULL)
 				t->prev->next = h;
 			t->prev = h;
-			if (h->prev == NULL)
+			if (t->prev == NULL)
 				*list = h;
+
 			print_list(*list);
 			t = t->prev;
 		}
