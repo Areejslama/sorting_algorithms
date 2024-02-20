@@ -23,22 +23,23 @@ void insertion_sort_list(listint_t **list)
 		while (t->prev != NULL && t->n < t->prev->n)
 		{
 			h = t;
-
+			
 			if (t->next != NULL)
 				t->next->prev = h->prev;
-			t->prev->next = h->next;
-			t = t->prev;
-			h->prev = t->prev;
-			h->next = t;
-			if (t->prev != NULL)
-				t->prev->next = h;
-			t->prev = h;
-			if (h->prev == NULL)
-				*list = h;
-
-			print_list(*list);
-			t = t->prev;
-			}
-        t = t->next;
-    }
+				t->prev->next = h->next;
+				t = t->prev;
+				h->prev = t->prev;
+				h->next = t;
+				
+				if (t->prev != NULL)
+					t->prev->next = h;
+				t->prev = h;
+				if (h->prev == NULL)
+					*list = h;
+				
+				print_list(*list);
+				t = t->prev;
+		}
+		t = t->next;
+	}
 }
